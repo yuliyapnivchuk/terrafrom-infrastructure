@@ -1,0 +1,5 @@
+subscription_id = "ff48c04f-8aab-4c23-8b90-424c41f8212d"
+region = "East US"
+sku="S0"
+resource_group_name_prefix="itstep"
+principal_id = "b730bb74-52bb-4aa8-8cd8-357da4967779"
