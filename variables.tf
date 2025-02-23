@@ -22,3 +22,13 @@ variable "principal_id" {
   type        = string
   description = "The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to."
 }
+
+variable "existing_key_vault_name" {
+  description = "The name of the existing Azure Key Vault"
+  type        = string
+}
+
+variable "existing_key_vault_rg" {
+  description = "The resource group of the existing Azure Key Vault"
+  type        = string
+}
