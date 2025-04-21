@@ -26,8 +26,16 @@ resource "azurerm_storage_account" "blob_storage" {
   name                     = "blobstorage${random_string.azurerm_name.result}"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
+  account_tier             = var.sku_name
   account_replication_type = "LRS"
+}
+
+resource "azurerm_container_registry" "container_registry" {
+  name                = "itstep"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  sku                 = var.sku_name
+  admin_enabled       = true
 }
 
 data "azurerm_key_vault" "existing" {
@@ -68,5 +76,17 @@ resource "azurerm_key_vault_secret" "blob_storage_key" {
 resource "azurerm_key_vault_secret" "storage_account_name" {
   name         = "BLOB-STORAGE-ACCOUNT-NAME"
   value        = azurerm_storage_account.blob_storage.name
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+resource "azurerm_key_vault_secret" "container_registry_username" {
+  name         = "REGISTRY-USERNAME"
+  value        = azurerm_container_registry.container_registry.admin_username
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
+resource "azurerm_key_vault_secret" "container_registry_password" {
+  name         = "REGISTRY-PASSWORD"
+  value        = azurerm_container_registry.container_registry.admin_password
   key_vault_id = data.azurerm_key_vault.existing.id
 }

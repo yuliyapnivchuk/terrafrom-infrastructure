@@ -10,7 +10,12 @@ variable "region" {
 
 variable "sku" {
   type        = string
-  description = "The sku name of the Azure Analysis Services server to create. Choose from: B1, B2, D1, S0, S1, S2, S3, S4, S8, S9. Some skus are region specific. See https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#availability-by-region"
+  description = "The sku name of the Azure Analysis Services server to create. Choose from: B1, B2, D1, S0, S1, S2, S3, S4, S8, S9. Some skus are region specific."
+}
+
+variable "sku_name" {
+  type        = string
+  description = "The SKU name. Possible values are Basic, Standard and Premium."
 }
 
 variable "resource_group_name_prefix" {
